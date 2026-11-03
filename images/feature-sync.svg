@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img">
+  <defs>
+    <radialGradient id="y1" cx="30%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#45bdf7" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#45bdf7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="y2" cx="70%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#8a84f4" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#8a84f4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="#edf0fa"/>
+  <rect width="1200" height="900" fill="url(#y1)"/>
+  <rect width="1200" height="900" fill="url(#y2)"/>
+  <rect x="330" y="280" width="200" height="340" rx="30" fill="#11183f"/>
+  <rect x="670" y="280" width="200" height="340" rx="30" fill="#5576f5"/>
+  <g stroke="#11183f" stroke-opacity=".35" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="530" y1="380" x2="670" y2="380"/>
+    <line x1="670" y1="470" x2="530" y2="470"/>
+  </g>
+  <circle cx="355" cy="330" r="14" fill="#45bdf7"/>
+  <circle cx="695" cy="330" r="14" fill="#ffffff"/>
+  <rect x="355" y="450" width="150" height="90" rx="16" fill="#ffffff" opacity=".2"/>
+  <rect x="695" y="450" width="150" height="90" rx="16" fill="#ffffff" opacity=".35"/>
+</svg>

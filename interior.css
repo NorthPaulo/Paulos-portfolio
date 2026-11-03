@@ -1,0 +1,1690 @@
+/* ================================================================
+   Interior design system — editorial content modules for Info,
+   Library, Resume, About and Project pages.
+   Inherits tokens from styles.css (grid, type, palette, radius).
+   Homepage stays expressive; interiors stay readable.
+   ================================================================ */
+
+/* ---------- Shell: shared container + 12-column editorial grid ---------- */
+
+.icontainer {
+  width: min(calc(100% - 48px), var(--page-max-width));
+  margin-inline: auto;
+}
+
+.igrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--projects-gap);
+}
+
+/* Vertical rhythm between modules on a page. */
+.imodule {
+  margin: 0;
+  padding: clamp(2rem, 5vh, 3.5rem) 0;
+}
+
+.imodule:first-child,
+.about--lead {
+  padding-top: clamp(3.5rem, 9vh, 6.5rem);
+}
+
+/* ---------- 1. Page masthead ---------- */
+
+.masthead__title {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  /* Section-heading scale: clearly below the hero headline. */
+  font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  max-width: 24ch;
+}
+
+/* Shared masthead wrapper: places the eyebrow, title and dek (About's
+   classes) across the full page grid. Used by Library and Writing. */
+.masthead {
+  grid-column: 1 / -1;
+}
+
+/* Pass & ID masthead: a taller, denser title block rather than a wide
+   three-line heading. Scoped to this page through its own modifier, so the
+   standard masthead on other interior pages is untouched. Weight comes from
+   the existing family (600 is inside its range), not from emphasis. */
+.masthead__title--editorial {
+  font-size: clamp(2.75rem, 1.7rem + 3.1vw, 4.625rem);
+  font-weight: 560;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  max-width: 9em;
+}
+
+@media (max-width: 700px) {
+  .masthead__title--editorial {
+    font-size: clamp(3rem, 2.2rem + 3.5vw, 3.25rem);
+  }
+}
+
+/* ---------- 2. Deck / introductory text ---------- */
+
+.deck {
+  grid-column: 1 / span 8;
+  margin: 0;
+  font-size: clamp(1.2rem, 1.1rem + 0.6vw, 1.45rem);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--text-secondary);
+  max-width: 42ch;
+}
+
+/* Pass & ID masthead and standfirst. The eyebrow, title and dek are set
+   here; their desktop axis is defined with the narrative below. */
+.project-masthead__dek {
+  margin-top: 1.5rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.375rem);
+  max-width: 40ch;
+}
+
+@media (max-width: 700px) {
+  .project-masthead__dek {
+    font-size: 1.375rem;
+  }
+}
+
+/* Pass & ID: a clear pause between the masthead and the first piece of
+   evidence. The visual keeps its wide, full-grid width. */
+.media.project-evidence {
+  margin-top: 4rem;
+}
+
+@media (max-width: 700px) {
+  .media.project-evidence {
+    margin-top: 2.5rem;
+  }
+}
+
+/* ---------- 3. Metadata row ---------- */
+
+.meta-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px clamp(2rem, 5vw, 4.5rem);
+  margin: 0;
+  padding: clamp(1.25rem, 3vh, 2rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-row__item {
+  margin: 0;
+  min-width: 120px;
+}
+
+.meta-row__label {
+  margin: 0 0 0.35rem 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meta-row__value {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+/* Project facts: one quiet line of orientation under the imagery. Unboxed,
+   no labels; the scope and context emerge through the case study itself. */
+.project-facts {
+  grid-column: 1 / -1;
+  margin: 1.25rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* Pass & ID: one off-centre editorial axis on desktop. The masthead, the
+   facts line and the narrative all start on the third column. The project
+   image keeps the full grid. */
+@media (min-width: 701px) {
+  .project-masthead__eyebrow,
+  .masthead__title--editorial,
+  .project-masthead__dek,
+  .project-facts {
+    grid-column: 3 / -1;
+  }
+  /* Narrative shares the masthead's column: one left edge from title to text. */
+  .prose.project-narrative {
+    grid-column: 3 / span 8;
+  }
+}
+
+/* ---------- 4. Narrow body text ---------- */
+
+.prose {
+  grid-column: 1 / span 8;
+  font-size: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 62ch;
+}
+
+.prose > *:first-child {
+  margin-top: 0;
+}
+
+.prose > *:last-child {
+  margin-bottom: 0;
+}
+
+.prose p {
+  margin: 0 0 1.4em 0;
+}
+
+.prose h2,
+.prose h3,
+.about-section-heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.prose h2,
+.about-section-heading {
+  font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.9rem);
+  line-height: 1.15;
+}
+
+.prose h2 {
+  margin: 2.2em 0 0.7em 0;
+}
+
+.prose h3 {
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
+  line-height: 1.3;
+  margin: 1.8em 0 0.6em 0;
+}
+
+/* ---------- 5/6. Text + image split (either direction) ---------- */
+
+.split__text {
+  grid-column: 1 / span 5;
+  align-self: center;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 60ch;
+}
+
+.split__text > *:first-child {
+  margin-top: 0;
+}
+
+.split__text > *:last-child {
+  margin-bottom: 0;
+}
+
+.split__media {
+  grid-column: 7 / span 6;
+}
+
+.split--rev .split__text {
+  grid-column: 8 / span 5;
+  order: 2;
+}
+
+.split--rev .split__media {
+  grid-column: 1 / span 6;
+  order: 1;
+}
+
+/* ---------- Media base + treatments ----------
+   Default (.media) preserves original colors — for UI, diagrams, data.
+   Add .media--wash for photographic mood, .media--shade for text-over-image. */
+
+.media {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: #eef1f8;
+  line-height: 0;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media--wash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg,
+    color-mix(in srgb, var(--hero-cyan) 8%, transparent),
+    color-mix(in srgb, var(--hero-blue) 6%, transparent) 50%,
+    color-mix(in srgb, var(--hero-violet) 8%, transparent));
+}
+
+.media--shade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--card-ink) 88%, transparent) 0%,
+    color-mix(in srgb, var(--card-ink) 55%, transparent) 30%,
+    transparent 62%);
+}
+
+.media--shade .media__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* ---------- 7/8. Wide + contained + full-bleed images ---------- */
+
+.media--wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 21 / 9;
+}
+
+.media--contained {
+  grid-column: 2 / span 10;
+  aspect-ratio: 16 / 9;
+}
+
+.media--full {
+  grid-column: 1 / -1;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  border-radius: 0;
+  aspect-ratio: 21 / 9;
+}
+
+.media--tall {
+  aspect-ratio: 3 / 4;
+}
+
+.media--square {
+  aspect-ratio: 1 / 1;
+}
+
+.media--landscape {
+  aspect-ratio: 4 / 3;
+}
+
+/* ---------- 9/10. Galleries (asymmetric, same grid) ---------- */
+
+.gallery-2 {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--projects-gap);
+  align-items: start;
+}
+
+.gallery-2 > :first-child {
+  grid-column: 1 / span 7;
+}
+
+.gallery-2 > :nth-child(2) {
+  grid-column: 8 / span 5;
+}
+
+.gallery-3 {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--projects-gap);
+  align-items: start;
+}
+
+.gallery-3 > :nth-child(1) {
+  grid-column: 1 / span 4;
+}
+
+.gallery-3 > :nth-child(2) {
+  grid-column: 5 / span 4;
+}
+
+.gallery-3 > :nth-child(3) {
+  grid-column: 9 / span 4;
+}
+
+/* ---------- 11. Image caption ---------- */
+
+.media__caption {
+  margin: 0.8rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* Caption under a gridded gallery item (outside .media, keeps line-height). */
+.caption {
+  margin: 0.8rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ---------- 12. Pull quote / highlighted statement ---------- */
+
+.pullquote {
+  grid-column: 2 / span 9;
+  margin: 0;
+  padding-left: clamp(1.25rem, 3vw, 2.25rem);
+  border-left: 2px solid var(--text-secondary);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.05rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  max-width: 30ch;
+}
+
+.pullquote footer {
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* ---------- 13. Metrics / outcome block ---------- */
+
+.metrics {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--projects-gap);
+  margin: 0;
+  padding: clamp(1.75rem, 4vh, 2.75rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  list-style: none;
+}
+
+.metric__value {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.metric__label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 24ch;
+}
+
+/* ---------- 14. Side-note / annotation ---------- */
+
+.with-note__text {
+  grid-column: 1 / span 7;
+}
+
+.with-note__note {
+  grid-column: 9 / span 4;
+}
+
+.sidenote {
+  margin: 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ---------- 15. Sticky narrative (CSS only, no scroll-jacking) ---------- */
+
+.sticky__text {
+  grid-column: 1 / span 5;
+}
+
+.sticky__step {
+  margin: 0 0 clamp(2rem, 8vh, 4rem) 0;
+  min-height: 40vh;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.sticky__step:last-child {
+  margin-bottom: 0;
+}
+
+.sticky__visual {
+  grid-column: 7 / span 6;
+  position: sticky;
+  top: 110px;
+  align-self: start;
+}
+
+/* ---------- 16. Disclosure (native details: free keyboard + motion-safe) ---------- */
+
+.disclosure {
+  grid-column: 3 / span 8;
+  background: #f6f7fb;
+  border-radius: 14px;
+}
+
+.disclosure + .disclosure {
+  margin-top: 12px;
+}
+
+.disclosure summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  border-radius: 14px;
+}
+
+.disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure summary::after {
+  content: "+";
+  margin-left: auto;
+  flex: none;
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 280ms ease;
+}
+
+.disclosure[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.disclosure__body {
+  padding: 0 20px 20px 20px;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ---------- 17. Next-project navigation ---------- */
+
+.nextproj {
+  grid-column: 1 / -1;
+  display: block;
+  padding: clamp(2rem, 5.5vh, 3.5rem) 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nextproj__label {
+  margin: 0 0 0.8rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nextproj__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.nextproj__title .arrow {
+  display: inline-block;
+  transition: transform 300ms ease;
+}
+
+.nextproj:hover .nextproj__title .arrow {
+  transform: translateX(10px);
+}
+
+/* ---------- Global footer: a clean ending to the page ----------
+   One implementation for every width. The information order never
+   changes -- CONTACT / statement / contact links / divider / copyright
+   + utility nav -- only the geometry does. */
+
+.site-footer {
+  /* Almost white, a trace warmer than the page above, so the footer
+     reads as a reset rather than as a new coloured surface. */
+  background: #fdfcfb;
+  /* One softer grey, derived from the existing neutral, for information
+     that must not compete with the contact links. */
+  --footer-utility: color-mix(in srgb, var(--muted) 70%, #ffffff);
+  padding: clamp(3.5rem, 8vh, 7rem) 0 clamp(2.25rem, 3.5vh, 3.25rem) 0;
+}
+
+.site-footer__inner {
+  width: min(calc(100% - 48px), var(--page-max-width));
+  margin-inline: auto;
+}
+
+.site-footer .projects-eyebrow {
+  margin-bottom: 14px;
+}
+
+/* Statement: 34px on a phone rising to 49px on a desktop. Weight stays
+   at 400 at every size -- hierarchy comes from scale, not from weight. */
+.site-footer__cta {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.125rem, 1.8rem + 1.42vw, 3.0625rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  max-width: 700px;
+}
+
+/* Contact: the resting footer is the statement, one action and LinkedIn.
+   "Start a conversation" opens the form in place. The action and the Send
+   button share the brown underlined text-link style of the site. */
+.site-footer__start {
+  margin-top: clamp(1.25rem, 3vh, 1.75rem);
+}
+
+.site-footer__toggle,
+.site-footer__button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.125rem, 1.8rem + 1.42vw, 3.0625rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+  /* The call to action is never allowed to break across lines. */
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* The form region. Closed, it takes no height and is inert; open, it grows
+   in place. Height and opacity share one short, calm transition. */
+.site-footer__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 300ms var(--reveal-opacity-ease),
+    opacity 300ms var(--reveal-opacity-ease);
+}
+
+.site-footer__panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.site-footer__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.contact-form {
+  display: grid;
+  gap: clamp(1.25rem, 3vh, 1.75rem);
+  max-width: 640px;
+  margin: clamp(1.75rem, 4vh, 2.5rem) 0 clamp(3.5rem, 8vh, 5rem) 0;
+  /* Room inside the clip so focus rings are not cut off. */
+  padding: 6px 6px 10px 6px;
+}
+
+.contact-form__field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.site-footer .contact-form__label {
+  margin: 0;
+}
+
+/* Fields: transparent, with a single thin rule; no boxes, radius or shadow. */
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.5rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font: inherit;
+  font-size: clamp(1.0625rem, 1.02rem + 0.17vw, 1.1875rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-bottom-color: var(--text-primary);
+}
+
+/* The site's own focus ring, in place of the browser's default blue box. */
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 3px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.contact-form textarea {
+  min-height: 6.5em;
+  resize: vertical;
+}
+
+/* Send: the final action, aligned to the right edge of the message field. */
+.contact-form .site-footer__button {
+  justify-self: end;
+}
+
+.contact-form__status {
+  margin: 0;
+  min-height: 1.5em;
+  font-size: clamp(1.0625rem, 1.02rem + 0.17vw, 1.1875rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.contact-form__status[data-state="error"] {
+  color: var(--text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__panel {
+    transition: none;
+  }
+}
+
+/* The one remaining footer link: LinkedIn. */
+.site-footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px clamp(1.75rem, 3vw, 2.5rem);
+  margin: clamp(2rem, 4.5vh, 3rem) 0 0 0;
+  padding: 0;
+  font-size: clamp(1.0625rem, 1.02rem + 0.17vw, 1.1875rem);
+  font-weight: 400;
+}
+
+.site-footer__row a {
+  color: var(--text-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+/* Utility bar: copyright left, navigation right, under a hairline. */
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 24px;
+  margin-top: clamp(2.25rem, 5vh, 3.5rem);
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--footer-utility);
+}
+
+.site-footer__meta nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 0;
+}
+
+.site-footer__meta a {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+/* The same middot the project captions use, so the utility list reads
+   as one group rather than five separate links. */
+.site-footer__meta nav a + a::before {
+  content: "\00b7";
+  margin: 0 14px;
+  color: var(--footer-utility);
+}
+
+.site-footer__meta a:hover,
+.site-footer__row a:hover {
+  color: var(--text-secondary);
+}
+
+/* ---------- Interior responsive: one calm single column ---------- */
+
+@media (max-width: 700px) {
+  .icontainer {
+    width: min(calc(100% - 40px), var(--page-max-width));
+  }
+  .igrid,
+  .gallery-2,
+  .gallery-3 {
+    grid-template-columns: 1fr;
+  }
+  .masthead__title,
+  .deck,
+  .meta-row,
+  .prose,
+  .prose--story,
+  .split__text,
+  .split__media,
+  .split--rev .split__text,
+  .split--rev .split__media,
+  .media--wide,
+  .media--contained,
+  .gallery-2 > *,
+  .gallery-3 > *,
+  .pullquote,
+  .metrics,
+  .with-note__text,
+  .with-note__note,
+  .sticky__text,
+  .sticky__visual,
+  .disclosure,
+  .nextproj {
+    grid-column: 1 / -1;
+  }
+  .split--rev .split__text,
+  .split--rev .split__media {
+    order: initial;
+  }
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    max-width: none;
+  }
+  .media--full {
+    border-radius: 0;
+  }
+  .sticky__visual {
+    position: static;
+  }
+  .sticky__step {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .disclosure summary::after,
+  .nextproj__title .arrow {
+    transition: none;
+  }
+}
+
+/* ================================================================
+   Article narrative modules — project/detail pages are
+   article-driven: text leads, media supports. Editorial treatments,
+   not dashboard cards. Palette used for labels/accents only;
+   UI, diagrams and data keep accurate colors.
+   ================================================================ */
+
+/* ---------- Article-width media (aligned with the reading column) ---------- */
+
+.media--article {
+  grid-column: 3 / span 7;
+}
+
+/* Natural-ratio images: diagrams, screenshots, research material. */
+.media--natural {
+  aspect-ratio: auto;
+  line-height: 0;
+}
+
+.media--natural img {
+  height: auto;
+}
+
+/* ---------- Shared narrative-note scaffold ---------- */
+
+.note {
+  grid-column: 3 / span 7;
+  margin: 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+  max-width: 68ch;
+}
+
+/* Scoped so the label wins over the generic `.note p` / `.note--finding > p` rules. */
+.note .note__label {
+  margin: 0 0 0.7rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.note p {
+  margin: 0 0 1em 0;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.18rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.note p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Decision block: situation → alternatives → trade-off ---------- */
+
+.decision {
+  grid-column: 2 / span 9;
+  margin: 0;
+  padding: clamp(2rem, 5vh, 3.25rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Work reading axis (desktop): the decision block starts on the masthead
+   column, with the same measure as the narrative. Mobile keeps the full-width
+   rule from the interior responsive block. */
+@media (min-width: 701px) {
+  .decision {
+    grid-column: 3 / span 8;
+  }
+}
+
+.decision__index {
+  margin: 0 0 0.9rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.decision__headline {
+  margin: 0 0 1.2rem 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  max-width: 28ch;
+}
+
+.decision__body {
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.18rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 68ch;
+}
+
+.decision__body p {
+  margin: 0 0 1.1em 0;
+}
+
+.decision__body p:last-child {
+  margin-bottom: 0;
+}
+
+.decision__move {
+  font-weight: 600;
+}
+
+/* ---------- Constraint note / trade-off note / key finding ---------- */
+
+.note--constraint .note__label {
+  color: var(--muted);
+}
+
+.note--tradeoff {
+  border-top: 2px solid var(--border);
+}
+
+.tradeoff__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px clamp(1.5rem, 4vw, 3rem);
+  margin-top: 1.1rem;
+}
+
+.tradeoff__cell h4 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.tradeoff__cell p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.note--finding {
+  border-top: 2px solid var(--border);
+}
+
+.note--finding > p,
+.note--finding .note__body {
+  font-size: clamp(1.15rem, 1.08rem + 0.4vw, 1.35rem);
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+/* ---------- Outcome / result highlight ---------- */
+
+.outcome {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: clamp(2.5rem, 6vh, 4rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--projects-gap);
+  align-items: baseline;
+}
+
+.outcome__value {
+  grid-column: 1 / span 5;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 2rem + 3vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.outcome__text {
+  grid-column: 7 / span 6;
+  font-size: clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--text-primary);
+  max-width: 48ch;
+}
+
+.outcome__text p {
+  margin: 0 0 1em 0;
+}
+
+.outcome__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Annotation (numbered marginal note) ---------- */
+
+.annotation {
+  counter-increment: annotation;
+  grid-column: 9 / span 4;
+  margin: 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.annotation::before {
+  content: "Note " counter(annotation, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.article {
+  counter-reset: annotation;
+}
+
+/* ---------- Article responsive: notes rejoin the reading flow ---------- */
+
+@media (max-width: 700px) {
+  .note,
+  .decision,
+  .media--article,
+  .outcome,
+  .annotation {
+    grid-column: 1 / -1;
+  }
+  .outcome {
+    grid-template-columns: 1fr;
+  }
+  .outcome__value,
+  .outcome__text {
+    grid-column: 1 / -1;
+  }
+  .tradeoff__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================
+   Index-page modules — Info, Library and Resume are list-driven
+   rather than narrative-driven. One shared pattern serves all three:
+   a label column on the left, content on the right, separated by
+   hairlines. Reuses the 12-column grid and existing type tokens.
+   ================================================================ */
+
+/* ---------- Anchored sections clear the sticky header ---------- */
+
+.imodule[id] {
+  scroll-margin-top: calc(var(--header-height) + 40px);
+}
+
+/* ---------- 18. In-page jump links ---------- */
+
+.jumplinks {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px clamp(1.25rem, 3vw, 2.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jumplinks a {
+  display: inline-block;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.jumplinks a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+/* ---------- 19. Section group heading ---------- */
+
+.group-title {
+  grid-column: 1 / -1;
+  margin: 0 0 0.5rem 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.group-note {
+  grid-column: 1 / -1;
+  margin: 0 0 clamp(1.25rem, 3vh, 2rem) 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* ---------- 20. Entry list: label column + content column ---------- */
+
+.entry-list {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 4px var(--projects-gap);
+  padding: clamp(1.1rem, 2.8vh, 1.75rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry__aside {
+  grid-column: 1 / span 3;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.entry__main {
+  grid-column: 4 / span 8;
+  margin: 0;
+}
+
+
+
+.entry__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.02rem + 0.35vw, 1.3rem);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  color: var(--text-primary);
+}
+
+.entry__meta {
+  margin: 0.3rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.entry__note {
+  margin: 0.6rem 0 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.entry__points {
+  margin: 0.7rem 0 0 0;
+  padding: 0 0 0 1.1em;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.entry__points li {
+  margin: 0 0 0.35em 0;
+}
+
+.entry__points li:last-child {
+  margin-bottom: 0;
+}
+
+/* Compact variant for dense reference lists (tools, languages). */
+.entry-list--compact .entry {
+  padding: clamp(0.8rem, 2vh, 1.1rem) 0;
+}
+
+.entry-list--compact .entry__title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+/* ---------- 21. Availability status ---------- */
+
+.status {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--hero-blue);
+}
+
+/* ---------- Index-page responsive: labels stack above content ---------- */
+
+@media (max-width: 700px) {
+  .jumplinks,
+  .group-title,
+  .group-note,
+  .entry-list,
+  .status {
+    grid-column: 1 / -1;
+  }
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .entry__aside,
+  .entry__main {
+    grid-column: 1 / -1;
+  }
+  .entry__aside {
+    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .entry__note,
+  .entry__points {
+    max-width: none;
+  }
+}
+
+/* ---------- Library book list ----------
+   Same ruled-list grammar as the homepage Index: thin rules, generous row
+   padding, left-aligned. Each row is cover | information, and the information
+   column reads title, author and year, then annotation. Scoped to this list. */
+.entry-list.library-books .entry {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--projects-gap);
+  align-items: start;
+  padding: clamp(1.5rem, 4vh, 2.5rem) 0;
+}
+
+.entry-list.library-books .entry__cover {
+  grid-column: 1 / span 2;
+  display: block;
+  width: 100%;
+  max-width: 72px;
+  height: auto;
+  margin: 0;
+}
+
+.entry-list.library-books .entry__main {
+  grid-column: 3 / span 9;
+  margin: 0;
+}
+
+/* Entry titles at feature scale: Library book titles and Resume role titles
+   share this type. Each keeps its own spacing below the title. */
+.entry-list.library-books .entry__title,
+.resume .entry__title {
+  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.125rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.entry-list.library-books .entry__title {
+  margin: 0 0 0.4rem 0;
+}
+
+.entry-list.library-books .entry__aside {
+  margin: 0 0 0.9rem 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--muted);
+}
+
+/* Annotation body: Library annotations and Resume accomplishments and
+   capability explanations share this type. */
+.entry-list.library-books .entry__note,
+.resume .entry__note,
+.resume .entry__points {
+  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.entry-list.library-books .entry__note {
+  margin: 0;
+  max-width: 58ch;
+}
+
+@media (max-width: 700px) {
+  .entry-list.library-books .entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: clamp(1.25rem, 3.5vh, 1.75rem) 0;
+  }
+  .entry-list.library-books .entry__cover {
+    grid-column: 1;
+    max-width: 56px;
+    margin-bottom: 1rem;
+  }
+  .entry-list.library-books .entry__main {
+    grid-column: 1;
+  }
+  .entry-list.library-books .entry__title,
+  .resume .entry__title {
+    font-size: clamp(1.5rem, 1.35rem + 0.8vw, 1.75rem);
+  }
+}
+
+/* About page: intro composition, then the story. Its top spacing is shared
+   with .imodule:first-child (see above), so the masthead starts on the same
+   line on every editorial page. */
+.about--lead {
+  padding-bottom: clamp(1rem, 3vh, 2rem);
+  /* When the page is reached by a link, the label lands below the sticky header. */
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+/* "How I got here": editorial reading measure on the main grid. */
+.prose--story {
+  grid-column: 1 / span 8;
+  max-width: 62ch;
+  line-height: 1.5;
+}
+
+/* About biography: the site's long-form reading measure (62ch, as .prose and
+   .prose--story use), on the same left edge as the opening title. Desktop
+   only; phones keep the full-width rule from the shared .prose rules. */
+@media (min-width: 701px) {
+  .prose.about-story {
+    grid-column: 1 / span 7;
+    max-width: 62ch;
+  }
+}
+
+@media (max-width: 899px) {
+  .about--lead {
+    padding-bottom: 0;
+  }
+}
+
+/* About's second section heading ("A few things I believe"). Its type is the
+   shared section-headline type (.prose h2, above); only its placement is set
+   here. The shared .group-title is unchanged. */
+.about-section-heading {
+  grid-column: 1 / -1;
+  margin: 0 0 0.7em 0;
+}
+
+@media (max-width: 700px) {
+  /* Footer shares the 40px phone gutter used by the rest of the site. */
+  .site-footer__inner {
+    width: min(calc(100% - 40px), var(--page-max-width));
+  }
+  /* Phone rhythm: tighter gaps between modules and under the header. */
+  .imodule {
+    padding: clamp(1.5rem, 4vh, 2.25rem) 0;
+  }
+  .imodule:first-child,
+  .about--lead {
+    padding-top: clamp(2rem, 5vh, 3rem);
+  }
+  /* The portrait's bottom margin is the only gap before the story. */
+  .about--lead + .icontainer > .imodule:first-child {
+    padding-top: 0;
+  }
+  .prose--story {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  .prose--story h2,
+  .about-story h2,
+  .about-section-heading {
+    font-size: clamp(1.875rem, 1.8rem + 0.3vw, 2.125rem);
+  }
+}
+
+
+/* ---------- Portrait ----------
+   Aligned to the same left edge as the prose column so the page keeps one
+   reading axis. The source is a circle on white, so the circular mask here
+   simply gives it a clean edge on any background. */
+
+.portrait {
+  grid-column: 3 / span 4;
+  margin: 0;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .portrait {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .portrait img {
+    max-width: 220px;
+  }
+}
+
+/* ---------- Key callout: standalone insight, no label needed ---------- */
+
+.note.callout {
+  grid-column: 1 / -1;
+  border: none;
+  padding: 0;
+  margin: clamp(2.5rem, 6.5vh, 4rem) 0;
+  text-align: center;
+}
+
+.note.callout p {
+  margin: 0;
+  font-size: clamp(1.4rem, 1.25rem + 0.8vw, 2rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* Phone pull quote: 30-34px, tighter line-height and vertical space.
+   Placed after the base callout rules so it wins at this width. */
+@media (max-width: 700px) {
+  .note.callout {
+    margin: clamp(1.75rem, 4.5vh, 2.5rem) 0;
+  }
+  .note.callout p {
+    font-size: clamp(1.875rem, 1.8rem + 0.5vw, 2.125rem);
+    line-height: 1.2;
+  }
+}
+
+/* ---------- Mobile typography: footer and body copy ----------
+   Phone only. Size first, then weight, then colour. */
+@media (max-width: 700px) {
+  /* Full width on phones so the statement cannot be narrower than its
+     words. Making the link a block composes the intended three lines:
+     "Let's make something / worth experiencing. / Get in touch". */
+  .site-footer__cta {
+    max-width: none;
+  }
+  .site-footer__row a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  /* Copyright first, utility navigation underneath it. */
+  .site-footer__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .site-footer__meta a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .disclosure__body,
+  .decision__body,
+  .outcome__text,
+  .with-note__text,
+  .sticky__text,
+  .split__text,
+  .group-note {
+    font-size: 1.0625rem;
+    line-height: 1.45;
+  }
+}
+
+/* ================================================================
+   Resume: structured professional record.
+   The factual end of the Index / Library ruled-list system. Entry titles take
+   the Library book-title treatment; section headings sit above them on the
+   page heading scale. Every rule is scoped to main.resume.
+   ================================================================ */
+
+/* Date and role share a first baseline: the quiet date reads as a label for
+   the role, not as a separate column competing with it. */
+.resume .entry {
+  align-items: baseline;
+}
+
+/* Section headings: page heading token, above the entry titles. */
+/* Resume major section headings use the site's major-section voice: the
+   --type-2 token and the .projects-title weight and line-height (large, regular).
+   Item titles below them keep the Library book-title role (medium, smaller). */
+.resume .group-title {
+  font-size: var(--type-2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+}
+
+/* Phone: the same size as the homepage phone .projects-title. */
+@media (max-width: 700px) {
+  .resume .group-title {
+    font-size: clamp(2.3rem, 2.125rem + 1vw, 2.55rem);
+  }
+}
+
+/* Role / entry titles: Library book-title treatment. */
+.resume .entry__title {
+  margin: 0 0 0.25rem 0;
+}
+
+/* Company / location: existing brown, set tight under the title. */
+.resume .entry__meta {
+  margin: 0;
+}
+
+/* Accomplishments and capability explanations: Library annotation body. */
+.resume .entry__note {
+  margin-top: 0;
+}
+
+/* Capability name: leads its explanation, in the label column where the
+   date sits in experience. */
+.resume .entry__name {
+  grid-column: 1 / span 3;
+  margin: 0;
+  /* One step under the role-title scale so the longest names fit the label column. */
+  font-size: clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem);
+}
+
+@media (max-width: 700px) {
+  .resume .entry {
+    align-items: start;
+  }
+  /* Phone: names keep the role-title phone size, as before the shared entry
+     title rule was introduced. */
+  .resume .entry__name {
+    grid-column: 1 / -1;
+    margin-bottom: 0.35rem;
+    font-size: clamp(1.5rem, 1.35rem + 0.8vw, 1.75rem);
+  }
+}
+
+/* ================================================================
+   Resume density (desktop only, 701px and up). Shorter by tightening rows
+   and the lower credential sections; the masthead, the type scale of the
+   Experience roles and the editorial spacing between sections stay as they
+   are. Mobile keeps its own spacing.
+   ================================================================ */
+@media (min-width: 701px) {
+  /* Experience: tighter role rows. */
+  .resume #experience .entry,
+
+  /* Lower credential sections: less space around each section... */
+  .resume #education,
+  .resume #professional-development,
+  .resume #awards {
+    padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  }
+
+  /* ...and tighter rows. Credential titles take the base entry-title size
+     (the same value used by .entry__title outside the Resume), so they read
+     as secondary to the Experience roles. */
+  .resume #education .entry,
+  .resume #professional-development .entry,
+  .resume #awards .entry {
+    padding: 0.8rem 0;
+  }
+
+  .resume #education .entry__title,
+  .resume #professional-development .entry__title,
+  .resume #awards .entry__title {
+    font-size: clamp(1.1rem, 1.02rem + 0.35vw, 1.3rem);
+  }
+}
+
+/* Capabilities as a compact expertise register (desktop only). Same label |
+   explanation grid and rules as before; smaller scale so it scans quickly. */
+@media (min-width: 701px) {
+  .resume #capabilities {
+    padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
+  }
+
+  .resume #capabilities .entry {
+    padding: clamp(0.875rem, 1.6vh, 1rem) 0;
+  }
+
+  .resume #capabilities .entry__name {
+    font-size: clamp(1.25rem, 1.18rem + 0.25vw, 1.375rem);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+  }
+
+  .resume #capabilities .entry__note {
+    font-size: clamp(0.9688rem, 0.95rem + 0.1vw, 1.03rem);
+    line-height: 1.45;
+  }
+}
+
+/* Experience: one concise description under each role. A small gap separates
+   it from the company line; typography is the Resume entry type above. */
+.resume #experience .entry__note {
+  margin-top: 0.6rem;
+  max-width: 62ch;
+}

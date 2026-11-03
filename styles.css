@@ -1,0 +1,1300 @@
+:root {
+  --accent: #d5ff45;
+  --accent-soft-1: #e8ff9c;
+  --accent-soft-2: #eaf7be;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #000000;
+  --muted: #383838;
+  --border: #dedede;
+  --dark: #000000;
+  --page-max-width: 1160px;
+  /* One outer grid for the header, the hero and the menu. The page
+     gutter is the only thing that changes responsively; the text
+     measures inside the hero are set separately and deliberately. */
+  --page-gutter: 24px;
+  --page-container: min(calc(100% - 2 * var(--page-gutter)), var(--page-max-width));
+  /* Fixed size for the header name and the Menu / Close label: identical
+     on every page and at every width. Phones override it below. */
+  --header-type: 1.1875rem;
+  --header-height: 55px;
+  /* Visual type roles (TYPE 1 = hero display, frozen — not reassigned). */
+  --type-2: clamp(2.25rem, 1.7rem + 2vw, 3rem);
+  --type-3: clamp(1.8rem, 1.45rem + 1.4vw, 2.5rem);
+  --type-4: clamp(1.2rem, 1.1rem + 0.5vw, 1.55rem);
+  --type-5: 1.15rem;
+  --type-6: 0.975rem;
+  --type-7: 0.8rem;
+  --text-primary: #000000;
+  --text-secondary: #71322d;
+  --cta-text: #383838;
+  --radius-card: 16px;
+  --font-heading: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Images keep their own proportions, always. width/height attributes are
+   for layout stability only and must never stretch the picture. Components
+   that need a fixed frame crop with object-fit, they do not distort. */
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--card);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Navigation ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+/* Protective background once content scrolls underneath the header. */
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom-color: rgba(17, 24, 63, 0.08);
+}
+
+.nav-container {
+  width: var(--page-container);
+  margin-inline: auto;
+  /* Shorter band, and deliberately asymmetric: more room above than
+     below so the lockup settles toward the lower edge instead of
+     floating in the middle of the bar. */
+  padding-top: 1.125rem;
+  padding-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The brand line: a link (mark + name) followed by the tagline, which is
+   plain text and not part of the link. */
+.brand-lockup {
+  display: inline-flex;
+  /* The name and the descriptor share a baseline so the parts read as one
+     horizontal line. The icon opts out and centres instead -- a square
+     mark has no meaningful baseline of its own. */
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: block;
+  align-self: center;
+  /* Whole-pixel height so the mark's edges land on the pixel grid.
+     Width follows the SVG's own proportions. */
+  height: 30px;
+  width: auto;
+  flex: none;
+  /* Rotated corners may extend a pixel past the mark's box; nothing is clipped. */
+  overflow: visible;
+}
+
+/* Header mark motion: the black outer shape turns on its own centre. The
+   angle is set by header.js: engaging turns it two faces (120 degrees),
+   disengaging one face (60 degrees). The outer shape repeats every 60 degrees,
+   so every resting position looks the same. The white symbol is a separate,
+   static path and never moves. Only with motion allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .brand-mark__outer {
+    transform-box: fill-box;
+    transform-origin: center center;
+    transform: rotate(var(--mark-turn, 0deg));
+    transition: transform var(--mark-duration, 400ms) cubic-bezier(0.5, 0, 0.7, 0.6);
+  }
+}
+
+/* Menu control: far right of the header on every width, 44px tap area. */
+.menu-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 5.5rem;
+  min-height: 44px;
+  padding: 0.5rem 0 0.5rem 0.75rem;
+  border: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-size: var(--header-type);
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.menu-toggle:hover {
+  color: var(--text-secondary);
+}
+
+/* ================================================================
+   HERO
+   Idea: complexity resolves into clarity. Colour and atmosphere
+   gather in the upper field — irregular, overlapping, bleeding off
+   the top and right edges so no single shape reads as a "blob".
+   The type sits low and left in cleared, near-white space.
+   One source of truth: .hero-field is the only background system.
+   ================================================================ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  /* The type is smaller than it was, so the hero is allowed to be
+     shorter rather than padded out to hold the old height. */
+  min-height: calc(86vh - var(--header-height));
+  min-height: calc(86svh - var(--header-height));
+  background: var(--card);
+}
+
+/* ---------- Atmosphere: overlapping colour fields ----------
+   Each field fades to a transparent version of its OWN hue, never to
+   `transparent` black, which is what causes grey banding in a fade.
+   The bleed box is larger than the hero so every falloff completes
+   off-canvas instead of ending on a visible edge. */
+
+.hero-field {
+  position: absolute;
+  inset: -14% -12% -16% -12%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(2px);
+  background-color: var(--card);
+  background-image:
+    /* Final dissolve into the page below — short, so colour survives
+       almost to the bottom of the hero. */
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 88%,
+      rgba(255, 255, 255, 0.70) 96%,
+      var(--card) 100%
+    ),
+    /* Clearing — a soft, wide pool of white behind the centred type.
+       Slightly left and slightly high of true centre so it never reads
+       as a symmetrical halo. */
+    radial-gradient(
+      ellipse 62% 36% at 46% 54%,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 255, 255, 0.76) 34%,
+      rgba(255, 255, 255, 0.38) 62%,
+      rgba(255, 255, 255, 0) 86%
+    ),
+    /* Violet running DOWN the right edge, mostly off-canvas. Keeps the
+       colour from reading as a horizontal band across the top. */
+    radial-gradient(
+      ellipse 28% 72% at 101% 46%,
+      rgba(140, 124, 246, 0.52) 0%,
+      rgba(140, 124, 246, 0.32) 30%,
+      rgba(140, 124, 246, 0.13) 58%,
+      rgba(140, 124, 246, 0) 84%
+    ),
+    /* Blue sweeping along the lower edge, weighted right. This is what
+       stops the bottom of the hero emptying out into flat white. */
+    radial-gradient(
+      ellipse 56% 30% at 74% 102%,
+      rgba(112, 130, 246, 0.40) 0%,
+      rgba(112, 130, 246, 0.22) 34%,
+      rgba(112, 130, 246, 0.08) 62%,
+      rgba(112, 130, 246, 0) 86%
+    ),
+    /* Periwinkle core, off-centre and bleeding off the top. */
+    radial-gradient(
+      ellipse 64% 44% at 61% -8%,
+      rgba(90, 118, 246, 0.56) 0%,
+      rgba(90, 118, 246, 0.36) 28%,
+      rgba(90, 118, 246, 0.14) 54%,
+      rgba(90, 118, 246, 0.04) 74%,
+      rgba(90, 118, 246, 0) 90%
+    ),
+    /* Cyan hugging the top-left corner only, so the middle-left loses
+       colour entirely and regains it lower down as warmth. */
+    radial-gradient(
+      ellipse 40% 34% at 10% 2%,
+      rgba(66, 186, 247, 0.50) 0%,
+      rgba(66, 186, 247, 0.29) 30%,
+      rgba(66, 186, 247, 0.09) 58%,
+      rgba(66, 186, 247, 0) 84%
+    ),
+    /* Warm undertone running up the lower-left — felt rather than seen,
+       and the only warmth in the field. */
+    radial-gradient(
+      ellipse 34% 40% at 1% 78%,
+      rgba(235, 190, 164, 0.40) 0%,
+      rgba(235, 190, 164, 0.20) 38%,
+      rgba(235, 190, 164, 0.05) 66%,
+      rgba(235, 190, 164, 0) 86%
+    );
+}
+
+/* ---------- Grain: stops the field reading as digitally perfect ----------
+   One inline SVG turbulence tile, no asset file, barely perceptible. */
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.042;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='170' height='170' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 170px 170px;
+}
+
+/* ---------- Composition: centred, as before ---------- */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: var(--page-container);
+  margin-inline: auto;
+  padding-top: calc(clamp(4rem, 39vh, 25rem) - 100px);
+  padding-bottom: clamp(5rem, 12vh, 9rem);
+  text-align: center;
+}
+
+/* Optical centring: lift the whole text group. Desktop lifts most,
+   tablet a little, mobile stays at true centre. */
+@media (min-width: 1024px) {
+  .hero-content {
+    top: -48px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1023px) {
+  .hero-content {
+    top: -24px;
+  }
+}
+
+/* Hero typography: a refined grotesk, set apart from the rest of the site.
+   Headline is the dominant statement; the supporting line is quieter. */
+/* The page grid is shared; the text measure is not. Each of these two
+   gets the measure that gives it the right number of lines. */
+.hero-headline,
+.hero-support {
+  font-family: var(--font-heading);
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+.hero-headline {
+  margin-top: -12px;
+  margin-bottom: 0;
+  font-weight: 500;
+  /* Genuinely fluid from tablet to desktop: 54px at 701px, 63px at
+     1024px, 75px at 1440px, capped at 78px. No step at 1024. */
+  font-size: clamp(54px, 34.08px + 2.84vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #111111;
+  max-width: 940px;
+}
+
+.hero-support {
+  margin-top: clamp(18px, 1rem + 0.9vw, 32px);
+  font-weight: 400;
+  /* Secondary by a clear margin: 21px on a phone, 27px at 1024px,
+     31px at 1440px. One formula for every width. */
+  font-size: clamp(21px, 17.15px + 0.96vw, 32px);
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  color: #743832;
+  max-width: 1000px;
+}
+
+/* Role follows the name in the top-left brand. Hidden when the header
+   has no room for it. */
+.brand-name {
+  font-size: var(--header-type);
+  font-weight: 600;
+}
+
+.brand-role {
+  display: none;
+  font-size: 1.0625rem;
+  font-weight: 400;
+}
+
+@media (min-width: 1024px) {
+  .brand-role {
+    display: inline;
+    color: var(--muted);
+  }
+  .brand-role::before {
+    content: "\00b7";
+    margin: 0 0.6rem;
+    opacity: 0.55;
+  }
+}
+
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  /* Near-black ring: strong contrast on white, cream and blue fields. */
+  outline: 3px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+@media (max-width: 899px) {
+  :root {
+    --header-height: 68px;
+  }
+  /* Narrower viewport: pull the colour fields in so they still gather
+     above the type instead of sitting behind it. */
+  .hero-field {
+    inset: -16% -22% -18% -22%;
+  }
+  .hero-content {
+    padding-top: calc(clamp(4rem, 39vh, 25rem) - 200px);
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    /* The one value that moves the shared outer grid on a phone. */
+    --page-gutter: 20px;
+  }
+  /* Tall narrow field: widen the bleed so the ellipses stay elliptical
+     and the clearing still reaches the type. */
+  .hero-field {
+    inset: -10% -55% -14% -55%;
+  }
+  .brand-mark {
+    height: 26px;
+  }
+}
+
+/* Very narrow phones: tighten header spacing so brand, CTA and Menu fit. */
+@media (max-width: 360px) {
+  .nav-container {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  /* Phone first impression: the opening holds most of the screen but no
+     longer all of it, so Selected Work begins to show without the hero
+     feeling hurried. 90svh -> 82svh is about a 10% shorter hero.
+     The type block is centred in the field rather than pushed down by a
+     fixed top padding, so it holds its position whether the headline
+     runs to four lines or five and whatever the phone's height. */
+  .hero {
+    min-height: calc(82vh - var(--header-height));
+    min-height: calc(82svh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  /* 24px of guaranteed clearance above, 42px below. The 18px difference,
+     plus the headline's -12px optical top margin, lifts the block 30px
+     off geometric centre so it does not read as having sunk. That holds
+     at roughly 46:54 above:below at every phone size. */
+  .hero-content {
+    padding-top: 24px;
+    padding-bottom: 42px;
+  }
+  /* The paragraph's inherited bottom margin would otherwise add an
+     invisible ~21px to the lower half and skew the centring. */
+  .hero-support {
+    margin-bottom: 0;
+  }
+  .hero-headline,
+  .hero-support {
+    max-width: none;
+  }
+  /* Phone band. It meets the tablet formula exactly at 700px (54px),
+     so the scale is continuous across the breakpoint. */
+  .hero-headline {
+    font-size: clamp(39px, 21.26px + 4.68vw, 54px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .brand,
+  .menu-toggle {
+    transition: none;
+  }
+}
+
+/* ---------- Motion: quiet block reveal (Linear-like) ---------- */
+
+:root {
+  --reveal-y: 18px;
+  --reveal-blur: 0px; /* blur removed; movement and fade kept */
+  --reveal-duration: 320ms;
+  --reveal-opacity-duration: 190ms;
+  --reveal-ease: cubic-bezier(.42, 0, .84, .58);
+  --reveal-opacity-ease: cubic-bezier(.2, .6, .2, 1);
+}
+
+/* Base: fully visible with transition behavior attached.
+   The hidden state below wins by specificity, and applies ONLY once
+   JS confirms the observer system is running (progressive enhancement). */
+.reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    opacity var(--reveal-opacity-duration) var(--reveal-opacity-ease),
+    transform var(--reveal-duration) var(--reveal-ease),
+    filter var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.motion-ready .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y), 0);
+  filter: blur(var(--reveal-blur));
+  will-change: transform, opacity, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+.reveal-delay-35 {
+  --reveal-delay: 35ms;
+}
+
+.reveal-delay-75 {
+  --reveal-delay: 75ms;
+}
+
+/* ---------- Hero copy choreography: A starts, B catches up,
+   both settle together. Triggered once via .hero-content.is-visible. */
+
+.hero-content {
+  --hero-a-duration: 500ms;
+  --hero-b-delay: 80ms;
+  --hero-b-duration: 420ms;
+  --hero-motion-ease: cubic-bezier(.32, .02, .38, 1);
+  --hero-opacity-ease: cubic-bezier(.2, .6, .2, 1);
+}
+
+html.motion-ready .hero-content:not(.is-visible) .hero-headline {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  filter: blur(4.5px);
+  will-change: transform, opacity, filter;
+}
+
+html.motion-ready .hero-content:not(.is-visible) .hero-support {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+}
+
+
+.hero-content.is-visible .hero-headline {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  transition:
+    opacity 290ms var(--hero-opacity-ease),
+    transform var(--hero-a-duration) var(--hero-motion-ease),
+    filter var(--hero-a-duration) var(--hero-motion-ease);
+}
+
+.hero-content.is-visible .hero-support {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  transition:
+    opacity 250ms var(--hero-opacity-ease) var(--hero-b-delay),
+    transform var(--hero-b-duration) var(--hero-motion-ease) var(--hero-b-delay),
+    filter var(--hero-b-duration) var(--hero-motion-ease) var(--hero-b-delay);
+}
+
+
+@media (max-width: 899px) {
+  :root {
+    --reveal-y: 16px;
+    --reveal-blur: 0px;
+    --reveal-duration: 300ms;
+  }
+  html.motion-ready .hero-content:not(.is-visible) .hero-headline {
+    transform: translate3d(0, 14px, 0);
+  }
+  html.motion-ready .hero-content:not(.is-visible) .hero-support {
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --reveal-y: 12px;
+    --reveal-blur: 0px;
+    --reveal-duration: 270ms;
+    --reveal-opacity-duration: 160ms;
+  }
+  html.motion-ready .hero-content:not(.is-visible) .hero-headline {
+    transform: translate3d(0, 12px, 0);
+  }
+  html.motion-ready .hero-content:not(.is-visible) .hero-support {
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  html.motion-ready .reveal:not(.is-visible),
+  html.motion-ready .hero-content:not(.is-visible) .hero-headline,
+  html.motion-ready .hero-content:not(.is-visible) .hero-support {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* ---------- Projects: editorial bento grid ---------- */
+
+:root {
+  /* These are the hero field's hues. The card and feature washes derive
+     from them so every colour surface on the page is the same palette. */
+  --hero-cyan: #42baf7;
+  --hero-blue: #5a76f6;
+  --hero-violet: #8c7cf6;
+  --hero-warm: #ebbea4;
+  --card-ink: #11183f;
+  --projects-gap: 24px;
+  /* Desktop Selected Work: the single visual-frame height, as a share of
+     the grid width. Both cards in a row use it, whatever their column. */
+  --frame-height: 34cqw;
+  scroll-padding-top: 6rem;
+}
+
+.projects {
+  background: var(--card);
+  padding: clamp(4rem, 9vh, 7.5rem) 0;
+}
+
+.projects-inner {
+  width: min(calc(100% - 48px), var(--page-max-width));
+  margin-inline: auto;
+}
+
+.projects-head {
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+.projects-eyebrow {
+  margin: 0 0 0.6rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.projects-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 1.9rem + 1.2vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--projects-gap);
+  row-gap: 64px;
+}
+
+.project-row {
+  display: contents;
+}
+
+/* Project index item: image frame first, title and metadata below it on
+   the page. The frame carries the clipped image and its radius. */
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.project-card__frame {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  /* Mobile default: full-width landscape frame. Desktop and tablet set a
+     fixed height below so every card in a row shares one image height. */
+  aspect-ratio: 3 / 2;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  border-radius: var(--radius-card);
+}
+
+.project-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+}
+
+@media (hover: hover) {
+  .project-card__image {
+    transition: transform 600ms ease;
+  }
+  a.project-card:hover .project-card__image {
+    transform: scale(1.035);
+  }
+}
+
+/* Card-image system. The uploaded image stays the dominant layer; these
+   two layers add a quiet atmosphere shared with the hero.
+   --card-overlay-strength (default 1) scales the colour wash for a card
+   that needs more or less. Keep it between about 0.6 and 1.2.
+   The colour is never changed per card, only its strength. */
+.project-card__wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Same arrangement as the hero field at roughly half strength:
+     cyan top-left, periwinkle across the top, violet down the right
+     edge, warm low-left. Broad, percentage-positioned fields so they
+     keep their character on narrow cards. */
+  background:
+    radial-gradient(ellipse 60% 55% at 6% 94%,
+      color-mix(in srgb, var(--hero-warm) calc(4% * var(--card-overlay-strength, 1)), transparent),
+      color-mix(in srgb, var(--hero-warm) 0%, transparent) 72%),
+    radial-gradient(ellipse 45% 85% at 100% 55%,
+      color-mix(in srgb, var(--hero-violet) calc(3.5% * var(--card-overlay-strength, 1)), transparent),
+      color-mix(in srgb, var(--hero-violet) 0%, transparent) 78%),
+    radial-gradient(ellipse 80% 55% at 58% -10%,
+      color-mix(in srgb, var(--hero-blue) calc(3% * var(--card-overlay-strength, 1)), transparent),
+      color-mix(in srgb, var(--hero-blue) 0%, transparent) 80%),
+    radial-gradient(ellipse 55% 45% at 2% 0%,
+      color-mix(in srgb, var(--hero-cyan) calc(3% * var(--card-overlay-strength, 1)), transparent),
+      color-mix(in srgb, var(--hero-cyan) 0%, transparent) 76%);
+}
+
+/* Grain: the same inline turbulence tile as the hero, very low opacity. */
+.project-card__wash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='170' height='170' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 170px 170px;
+}
+
+/* Caption: sits outside the image, aligned exactly to its left edge.
+   Image -> title: 16px. Title -> metadata: 7px. */
+.project-card__text {
+  display: block;
+  padding-top: 16px;
+}
+
+.project-card__title {
+  display: block;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  /* Mobile 22-25px */
+  font-size: clamp(1.375rem, 1.3rem + 0.4vw, 1.5625rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  text-wrap: pretty;
+}
+
+.project-card__meta {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #1f1f1f;
+}
+
+@media (min-width: 701px) {
+  .projects-grid {
+    row-gap: 60px;
+  }
+  /* Tablet 24-27px, metadata 15-16px */
+  .project-card__title {
+    font-size: clamp(1.5rem, 1.45rem + 0.3vw, 1.6875rem);
+  }
+  .project-card__meta {
+    font-size: 1rem;
+  }
+  /* Same image height for every card in a row. */
+  .project-card__frame {
+    aspect-ratio: auto;
+    height: clamp(260px, 36vw, 340px);
+  }
+}
+
+/* Desktop Selected Work only: narrower composition with more outer
+   whitespace, a calmer caption, and more air between project rows.
+   Phone and tablet are untouched (this block is desktop-only). */
+@media (min-width: 1024px) {
+  .projects {
+    padding-block: clamp(6rem, 12vh, 10rem);
+  }
+  .projects-inner {
+    width: min(calc(100% - 2 * clamp(48px, 8vw, 140px)), 940px);
+  }
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 68px;
+    /* Makes the grid a size container so one frame height can be
+       expressed as a share of the grid width (see --frame-height). */
+    container-type: inline-size;
+  }
+  .project-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    column-gap: 56px;
+    align-items: start;
+  }
+  .project-row--reverse {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+  /* The rule of this grid: columns differ in width, visual frames never
+     differ in height. One height, measured against the grid itself, so
+     both frames in a row are identical and every title starts on the
+     same line. The wider card simply gets a wider crop. */
+  .project-card__frame {
+    aspect-ratio: auto;
+    height: var(--frame-height);
+  }
+  .project-card__text {
+    padding-top: 14px;
+  }
+  .project-card__title {
+    font-size: 1.1875rem;
+    line-height: 1.1;
+  }
+  .project-card__meta {
+    margin-top: 6px;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Tablet spans only; desktop replaces the row with its own two-column
+   grid above. Every row is one wide card beside one narrow card, which
+   is the same 55/45 rhythm the desktop grid uses. */
+.project-card--wide { grid-column: span 7; }
+.project-card--narrow { grid-column: span 5; }
+
+@media (min-width: 1024px) {
+  .project-card--wide,
+  .project-card--narrow {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .projects {
+    padding-top: 3.5rem;
+  }
+  .projects-inner {
+    width: min(calc(100% - 40px), var(--page-max-width));
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    row-gap: 68px;
+  }
+  /* Phone index: its own typographic scale, not reduced desktop cards.
+     Stepped down about 7% so the section introduction sits clearly below
+     the hero proposition rather than answering it at the same volume. */
+  .projects-title {
+    font-size: clamp(2.3rem, 2.125rem + 1vw, 2.55rem);
+  }
+  /* Eyebrow, heading and first card drawn a little closer together, so
+     the introduction reads as one unit before the work begins.
+     Scoped to .projects-head: the same eyebrow class is used by the
+     footer and the Approach section, which are not in scope. */
+  .projects-head .projects-eyebrow {
+    margin-bottom: 0.45rem;
+  }
+  .projects-head {
+    margin-bottom: 2.375rem;
+  }
+  .project-card__title {
+    font-size: clamp(1.625rem, 1.55rem + 0.4vw, 1.8125rem);
+    font-weight: 600;
+    line-height: 1.08;
+  }
+  .project-card__meta {
+    margin-top: 8px;
+    font-size: 1.09375rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: #1f1f1f;
+  }
+  .project-card--wide,
+  .project-card--narrow {
+    grid-column: 1 / -1;
+  }
+  .project-card__text {
+    padding-top: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card__image {
+    transition: none;
+  }
+  a.project-card:hover .project-card__image {
+    transform: none;
+  }
+}
+
+/* ---------- About ---------- */
+
+.about {
+  background: var(--card);
+  padding: clamp(4rem, 10vh, 8rem) 0 clamp(5rem, 12vh, 9rem);
+}
+
+/* Intro composition: text (about 60%) and portrait (about 40%) share one
+   top line, so the portrait sits level with the headline. */
+.about-intro {
+  display: grid;
+  /* Text about 64% of the width, portrait about 30%, the rest is gutter. */
+  grid-template-columns: 64% 30%;
+  justify-content: space-between;
+  align-items: start;
+}
+
+/* Portrait is a secondary element: about 290px on desktop, down from 340px. */
+.about-intro .portrait {
+  grid-column: auto;
+  width: 100%;
+}
+
+.about-intro .portrait img {
+  max-width: 320px;
+}
+
+.about-title {
+  margin: 0 0 clamp(1.5rem, 4vh, 2.5rem) 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2.75rem, 2.1rem + 2.4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  max-width: 15em;
+}
+
+.about-lede {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.05rem + 0.6vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 44ch;
+}
+
+/* Stacked composition (phone and portrait tablet): label, headline,
+   intro, CTA, portrait, then the story, with no dead space between. */
+@media (max-width: 899px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+  }
+  .about-intro .portrait {
+    margin-top: clamp(2.25rem, 6vh, 3rem);
+  }
+  .about-title {
+    font-size: clamp(2.625rem, 2.5rem + 0.6vw, 3rem);
+  }
+  .about-lede {
+    font-size: clamp(1.375rem, 1.3rem + 0.3vw, 1.625rem);
+    max-width: 30ch;
+  }
+}
+
+/* Phone: portrait centred in the content area, with the story following
+   after a deliberate gap. */
+@media (max-width: 700px) {
+  .about-intro .portrait {
+    margin: 72px 0 80px 0;
+  }
+  .about-intro .portrait img {
+    width: min(57vw, 270px);
+    max-width: none;
+    margin-inline: auto;
+  }
+}
+
+/* ---------- Index: quiet editorial echo of the menu, before Contact ----------
+   Four destinations, right-aligned on desktop, in the menu's typeface and
+   weight logic at roughly half its size. Thin rules between rows. Hover and
+   focus change colour only; nothing moves. */
+
+.index {
+  /* Editorial chapter break after Selected Work. */
+  padding-top: 4.5rem;
+  /* Space before the footer's tinted band, so the last rule does not sit on it. */
+  padding-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+.index__inner {
+  --index-row-pad: clamp(0.75rem, 1.5vh, 1.125rem);
+  width: var(--page-container);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--projects-gap);
+  /* Label and first row share a baseline, so "Index" lines up with the first link. */
+  align-items: baseline;
+}
+
+.index__label {
+  grid-column: 1 / span 3;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.index__nav {
+  grid-column: 4 / -1;
+}
+
+.index__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.index__list li {
+  border-bottom: 1px solid var(--border);
+}
+
+.index__link {
+  display: block;
+  padding: var(--index-row-pad) 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2.25rem, 1.4rem + 2.5vw, 3.875rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+/* Hover mirrors the menu: brown text with the same thin underline. */
+@media (hover: hover) {
+  .index__link:hover {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.09em;
+  }
+}
+
+/* Phone: label above, rows stacked full width and left-aligned like the
+   mobile menu, with a generous tap area per row. */
+@media (max-width: 700px) {
+  .index {
+    padding-top: 2rem;
+  }
+  .index__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
+  }
+  .index__label,
+  .index__nav {
+    grid-column: 1;
+  }
+  .index__link {
+    padding: 0.85rem 0;
+    text-align: left;
+    font-size: clamp(1.625rem, 1.2rem + 2.2vw, 1.875rem);
+    line-height: 1.1;
+  }
+}
+
+/* ================================================================
+   SITE MENU
+   Closed: brand and Menu only. Open: a full-screen typographic statement
+   that uses the hero's type. Scale, weight and placement carry it; hover
+   changes colour only.
+   ================================================================ */
+
+html.menu-open {
+  overflow: hidden;
+}
+
+html.menu-open .site-header {
+  z-index: 40;
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  /* Same atmosphere as the hero, held pale. */
+  background:
+    radial-gradient(ellipse 60% 50% at 0% 0%,
+      color-mix(in srgb, var(--hero-cyan) 24%, transparent), transparent 70%),
+    radial-gradient(ellipse 55% 60% at 100% 35%,
+      color-mix(in srgb, var(--hero-violet) 28%, transparent), transparent 72%),
+    radial-gradient(ellipse 60% 45% at 0% 100%,
+      color-mix(in srgb, var(--hero-warm) 34%, transparent), transparent 72%),
+    radial-gradient(ellipse 50% 40% at 70% 100%,
+      color-mix(in srgb, var(--hero-blue) 18%, transparent), transparent 70%),
+    var(--card);
+  transition: opacity 320ms ease, visibility 0s linear 320ms;
+}
+
+/* The panel receives focus when it opens so that no link is left looking
+   selected. It is a container, not a control, so it draws no ring of its
+   own -- the first Tab moves to a real link, which does. */
+.menu-panel:focus {
+  outline: none;
+}
+
+.menu-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 320ms ease, visibility 0s;
+}
+
+/* Same outer grid as the header and the hero. */
+.menu-panel__inner {
+  box-sizing: border-box;
+  min-height: 100%;
+  width: var(--page-container);
+  margin-inline: auto;
+  padding: calc(var(--header-height) + clamp(2.5rem, 8vh, 5rem)) 0 clamp(2rem, 6vh, 3.5rem);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--projects-gap);
+  grid-template-rows: 1fr;
+}
+
+.menu-primary ul,
+.menu-work ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Primary navigation: set right-aligned against the right edge of the grid. */
+.menu-primary {
+  grid-column: 5 / -1;
+  grid-row: 1;
+  align-self: center;
+  justify-self: end;
+  text-align: right;
+}
+
+.menu-primary a {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  /* Fluid from tablet to desktop: 69px at 701px, 79px at 1024px,
+     92px at 1440px, capped at 98px. The menu stays about a quarter
+     larger than the hero headline at every width. */
+  font-size: clamp(68px, 47px + 3.125vw, 98px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+/* CURRENT PAGE: the brown accent plus a permanent rule under the word.
+   Two signals, so it does not depend on colour alone and cannot be
+   confused with a link that merely happens to be hovered or focused. */
+.menu-primary a[aria-current="page"] {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.09em;
+}
+
+/* Selected work: secondary, bottom left, away from the primary links.
+   Five columns, not four: at 1024px four columns forced "Vipps Commerce
+   Platform" onto two lines. The negative space in the middle stays
+   generous at every desktop width. */
+.menu-work {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+  align-self: end;
+}
+
+.menu-eyebrow {
+  margin: 0 0 0.9rem 0;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.menu-work li + li {
+  margin-top: 0.4rem;
+}
+
+.menu-work a {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.625rem, 1.5rem + 0.5vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+/* Desktop: the overlay fills the viewport. Primary navigation and Selected
+   Work share one row. The bottom safe area keeps the approved positions: it
+   is the band the old contact strip occupied (its bottom padding, the row gap
+   and the strip itself), so the navigation stays where it was and Selected
+   Work clears the viewport edge. */
+@media (min-width: 701px) {
+  .menu-panel__inner {
+    min-height: 100vh;
+    min-height: 100dvh;
+    grid-template-rows: 1fr;
+    padding-bottom: calc(clamp(2rem, 6vh, 3.5rem) + clamp(2rem, 6vh, 4rem) + 2.7rem);
+  }
+}
+
+/* HOVER: the same rule, but in the link's own colour and never brown,
+   so hovering can never be read as "this is the page I am on".
+   Nothing moves, scales or reflows. */
+@media (hover: hover) {
+  .menu-panel a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.09em;
+  }
+}
+
+/* KEYBOARD FOCUS: handled by the global outline ring alone. There is
+   deliberately no colour or underline change here, so focus can never
+   imitate the current page. Opening the menu moves focus to the panel
+   itself (see menu.js), not onto the first link. */
+
+/* Phone: the same confidence, set large on the left edge. */
+@media (max-width: 700px) {
+  .menu-panel__inner {
+    padding-top: calc(var(--header-height) + 2.5rem);
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    /* Stack from the top: no spare height is shared between the rows, so no
+       empty space opens between navigation and Selected Work. */
+    align-content: start;
+    row-gap: 0;
+  }
+
+  .menu-primary,
+  .menu-work {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .menu-primary {
+    align-self: start;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .menu-primary a {
+    display: block;
+    /* Meets the formula above at 700px, so there is no step there. */
+    font-size: clamp(46px, 18.32px + 7.23vw, 69px);
+    line-height: 1;
+    padding: 0.15rem 0;
+  }
+
+  .menu-work {
+    align-self: start;
+    margin: clamp(2.5rem, 7vh, 3.5rem) 0 0 0;
+  }
+
+  .menu-work a {
+    display: block;
+    min-height: 44px;
+    padding: 0.5rem 0;
+    font-size: clamp(1.3125rem, 1.25rem + 0.4vw, 1.4375rem);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-panel {
+    transition: none;
+  }
+}
