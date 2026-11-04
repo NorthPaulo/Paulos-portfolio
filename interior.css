@@ -537,6 +537,123 @@
   color: var(--muted);
 }
 
+/* ---------- Working prototype (Mattilsynet) ----------
+   Text link after the introduction, and a closing action before the
+   next-project link. */
+
+.prototype-icon {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.25em;
+  vertical-align: -0.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prototype-link {
+  margin: 1.25rem 0 0 0;
+}
+
+/* Sits under the masthead title and subtitle, on the same column. */
+@media (min-width: 701px) {
+  .prototype-link {
+    grid-column: 3 / span 8;
+  }
+}
+
+.prototype-link a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.09em;
+}
+
+.prototype-link a:hover {
+  color: var(--text-primary);
+}
+
+.prototype-cta {
+  padding-top: clamp(2.5rem, 7vh, 4rem);
+}
+
+.prototype-cta__text {
+  grid-column: 3 / span 8;
+  max-width: 62ch;
+}
+
+.prototype-cta__title {
+  margin: 0 0 0.8rem 0;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.prototype-cta__description {
+  margin: 0;
+  font-size: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.prototype-cta__action {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: clamp(2rem, 5vh, 2.75rem);
+}
+
+.prototype-cta__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid var(--text-secondary);
+  border-radius: var(--radius-card);
+  background: var(--text-secondary);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.prototype-cta__button .prototype-icon {
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: 0;
+}
+
+.prototype-cta__button:hover {
+  background: color-mix(in srgb, var(--text-secondary) 85%, #000000);
+  border-color: color-mix(in srgb, var(--text-secondary) 85%, #000000);
+}
+
+@media (max-width: 700px) {
+  .prototype-cta__text {
+    grid-column: 1 / -1;
+  }
+  .prototype-cta__button {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
+
+/* Mattilsynet only: more air between the closing prototype action and the
+   next-project link, so the two do not compete. */
+.imodule.prototype-next {
+  padding-top: clamp(4rem, 10vh, 6rem);
+}
+
 /* ---------- 17. Next-project navigation ---------- */
 
 .nextproj {
