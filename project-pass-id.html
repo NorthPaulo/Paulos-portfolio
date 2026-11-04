@@ -55,8 +55,8 @@
   <div class="imodule reveal">
     <div class="igrid">
       <p class="projects-eyebrow project-masthead__eyebrow">Politidirektoratet &middot; Pass &amp; ID</p>
-      <h1 class="masthead__title masthead__title--editorial">Designing a clearer path to passports and national ID cards.</h1>
-      <p class="deck project-masthead__dek">Connecting the Pass and ID journey from first touchpoint to final verification.</p>
+      <h1 class="masthead__title masthead__title--editorial">Designing one connected service for citizens and police</h1>
+      <p class="deck project-masthead__dek">Applying for a Norwegian passport or national ID card involves more than filling in an application.</p>
       <figure class="media media--wide media--natural project-evidence">
         <img src="images/01-politi-kiosk-in-use.webp" alt="Citizen at a biometric kiosk, with the officer workstation in the background." width="1800" height="1125">
       </figure>
@@ -67,12 +67,11 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
+        <p>Citizens interact with biometric equipment to capture their photograph, fingerprints and signature, while police officers use that information to process the case.</p>
+        <p>For two and a half years, I worked on both sides of this service, designing how citizens interacted with the biometric equipment and how police officers understood and used the information it captured.</p>
         <h2>One service, several connected parts</h2>
-        <p>Citizens used biometric equipment to capture a photograph, fingerprints and signature. Police officers then had to understand what had happened and continue the case in their own tools.</p>
-        <p>These parts could not be designed separately.</p>
-        <p>A decision in the kiosk could change what an officer saw later. Hardware limited what the interaction could do. Security and regulation limited what information we could show. Police procedures set what should happen when something went wrong.</p>
-        <p>I worked with users, client representatives, international authorities, EU legal experts and teams responsible for both hardware and digital services.</p>
-        <p>Before designing individual screens, we mapped how people, information, equipment and systems depended on one another.</p>
+        <p>The biometric kiosk and the tools used by police officers could not be designed independently.</p>
+        <p>What happened during biometric capture affected what officers could see and do later. Hardware capabilities shaped the interactions, while security requirements, legislation and police procedures determined what information could be shown and how exceptions should be handled.</p>
       </div>
     </div>
   </div>
@@ -87,6 +86,19 @@
 
   <div class="imodule reveal">
     <div class="igrid">
+      <div class="prose project-narrative">
+        <p>I worked with users, police representatives, international authorities, EU legal experts and development teams responsible for both the hardware and digital services.</p>
+        <p>We mapped the relationships between people, equipment, information and systems to understand how decisions in one part of the service affected the others.</p>
+        <h2>Giving people control over their passport photo</h2>
+        <p>The police initially wanted biometric capture to run as automatically as possible.</p>
+        <p>Once a photograph met the technical requirements, the system would accept it and move to the next step without interruption.</p>
+        <p>I questioned that assumption and tested the proposed flow with users.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="imodule reveal">
+    <div class="igrid">
       <figure class="media media--wide media--natural">
         <img src="images/03-politi-workshop-prototype-review.webp" alt="Project team in a workshop, mapping the service around a wall of notes and screens." width="1418" height="1053" loading="lazy">
       </figure>
@@ -96,7 +108,12 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <p>The goal was not to hide the complexity. It was to decide which parts users needed to understand and which parts the service should handle for them.</p>
+        <p>The findings were clear. People expected to see the photograph before continuing and wanted the opportunity to take another.</p>
+        <p>This mattered because the photograph would appear on an identity document they might use for many years.</p>
+        <p>The research led to a change in the flow. Instead of automatically accepting a technically valid photograph, the service introduced an explicit step where users could review it and choose to accept or retake it.</p>
+        <p>The additional interaction gave people control over something they considered important.</p>
+        <h2>Designing biometric capture for children</h2>
+        <p>Testing also showed that the standard interaction did not work equally well for young children.</p>
       </div>
     </div>
   </div>
@@ -112,13 +129,11 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <h2>Questioning the assumption behind the photo flow</h2>
-        <p>The police wanted biometric capture to run continuously. Once a photograph met the biometric requirements, the system would accept it and continue automatically.</p>
-        <p>That was the right logic for operations. But it assumed users would be comfortable continuing without seeing the photograph. I questioned that assumption and tested the flow with users.</p>
-        <p>The result was clear.</p>
-        <p>People expected to see the photograph before continuing. They wanted to know what had been captured, and they wanted the option to take another.</p>
-        <p>That expectation made sense. The photograph would appear on a passport or national ID card, and it could stay in use for several years.</p>
-        <p>The evidence changed the flow. Users now review the photograph and either accept it or retake it before continuing.</p>
+        <p>The capture process relied on instructions that children could not always understand or follow at the right moment. In particular, getting them to look directly towards the camera was difficult.</p>
+        <p>I developed a concept specifically for children, introducing playful visual cues around the camera to attract their attention.</p>
+        <p>One version used a tiger positioned close to the lens.</p>
+        <p>During testing, these visual cues helped children look towards the camera more reliably, making it easier to capture a suitable photograph.</p>
+        <p>The concept was tested and taken forward as a way to adapt biometric capture to children's behaviour rather than expecting them to follow the same interaction as adults.</p>
       </div>
     </div>
   </div>
@@ -133,22 +148,13 @@
 
   <div class="imodule reveal">
     <div class="igrid">
-      <div class="note callout">
-        <p>The most efficient flow on paper did not match what people expected.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="imodule reveal">
-    <div class="igrid">
       <div class="prose project-narrative">
-        <h2>Children needed a different interaction</h2>
-        <p>The same interaction did not work for every age group.</p>
-        <p>The standard flow relied on written and spoken instructions. Testing showed that young children could not reliably be expected to respond to those instructions at the right moment during biometric capture.</p>
-        <p>This was a mismatch between the interaction model and how this user group behaves.</p>
-        <p>I developed a child-mode concept with visual cues close to the camera. One version used a tiger to draw the child’s attention to the right place.</p>
-        <p>In testing, children looked towards the camera more reliably. That made it easier to capture a usable biometric photograph.</p>
-        <p>The change was small, but the reasoning mattered. We did not ask the child to adapt to the system. We adapted the capture to the child.</p>
+        <h2>Supporting police officers within strict limits</h2>
+        <p>On the police side, the challenge was different.</p>
+        <p>Officers needed to understand the status of biometric capture, identify problems and know when to continue or intervene.</p>
+        <p>But the systems handled sensitive identity and biometric information. Security, confidentiality and legal requirements limited what information could be displayed and how it could be used.</p>
+        <p>The design work involved finding ways to give officers the information they needed without compromising those requirements.</p>
+        <p>Accessibility was another demanding constraint. The programme targeted WCAG AAA, influencing interaction design, language and visual presentation throughout the service.</p>
       </div>
     </div>
   </div>
@@ -164,24 +170,11 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <h2>Officers needed information, within strict limits</h2>
-        <p>The internal systems handled sensitive identity and biometric data under strict security and confidentiality requirements.</p>
-        <p>This created a design tension. Officers needed enough information to understand what was happening and act correctly. Security, confidentiality and regulation limited what could be exposed, and how.</p>
-        <p>That tension raised the practical questions: what information could we show, where could we show it, and how much context did an officer need to act correctly?</p>
-        <p>The service also had to meet biometric standards, hardware limits, police procedures and national and international regulation.</p>
-        <p>A and AA are the regulatory baseline for public-sector websites and apps in Norway. This project was designed to meet AAA, which shaped interaction design, content and visual presentation across the service.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="imodule reveal">
-    <div class="igrid">
-      <div class="prose project-narrative">
-        <h2>Deciding where the complexity should live</h2>
-        <p>The complexity here was real. Different users, biometric hardware, regulation, security requirements and police operations all had to work together.</p>
-        <p>That complexity could not be removed.</p>
-        <p>The design task was to understand how these conditions depended on one another. Then decide where users needed information or control, and where the system should carry the complexity.</p>
-        <p>That principle shaped decisions at very different scales: from questioning whether an uninterrupted flow was right for users, to adapting biometric capture for young children.</p>
+        <h2>Result</h2>
+        <p>The work connected the citizen experience and police operations within a service governed by strict technical, legal and security requirements.</p>
+        <p>Research led to specific changes in the interaction design. The photograph review became an explicit part of the capture process, while testing with children produced a different approach to guiding their attention towards the camera.</p>
+        <p>Across both citizen and officer interfaces, the design work addressed how people understood information, made decisions and continued when something required their attention.</p>
+        <p>The project showed why designing for the people using a service sometimes means questioning what appears to be the most efficient technical solution.</p>
       </div>
     </div>
   </div>
