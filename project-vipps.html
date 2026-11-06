@@ -12,7 +12,7 @@
 <meta property="og:title" content="Vipps Commerce Platform — Paulo Seabra">
 <meta property="og:description" content="Vipps: designing payment flows around users’ mental models. A design case study by Paulo Seabra.">
 <meta property="og:url" content="https://pauloseabra.com/project-vipps.html">
-<meta property="og:image" content="https://pauloseabra.com/images/social-share-logo.png">
+<meta property="og:image" content="https://pauloseabra.com/images/social-share-logo.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,9 +64,12 @@
     <div class="igrid">
       <p class="projects-eyebrow project-masthead__eyebrow">Vipps &middot; Large Customers</p>
       <h1 class="masthead__title masthead__title--editorial">Making Vipps payments easier to understand</h1>
-      <p class="deck project-masthead__dek">At Vipps, I led service design and research within the Commerce Platform / Large Customers team.</p>
-      <figure class="media media--wide project-evidence">
-        <img src="images/project-statens.svg" alt="Vipps payment flow showing different payment contexts." width="1600" height="1000">
+      <p class="deck project-masthead__dek">While working in Vipps’ Large Customers area, I uncovered a problem hidden in plain sight.</p>
+      <figure class="media media--wide project-evidence project-screens">
+        <picture>
+          <source media="(max-width: 700px)" srcset="images/vipps-02-mobile.png">
+          <img src="images/vipps-02-desktop.png" alt="Two Vipps payment screens side by side: today’s checkout with a large purple amount card, and a later version where the merchant’s red brand and logo lead the screen." width="2400" height="1029">
+        </picture>
       </figure>
       <p class="project-facts">Service Design Lead / Research Lead</p>
     </div>
@@ -75,8 +78,8 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <p>Our research uncovered a surprising misunderstanding: <strong>around 80% of participants believed they would be charged a fee when paying with Vipps in an online shop.</strong> In fact, those payments were free.</p>
-        <p>The confusion came from something more fundamental. People did not always distinguish between sending money to another person and using Vipps to pay for an online purchase.</p>
+        <p>Customers were confusing payments to other people with payments to businesses. The two experiences looked remarkably similar, despite having different rules.</p>
+        <p>Personal transfers above a certain amount could incur a fee. Many customers assumed the same applied when paying a business. Around <strong>80% of users believed they could be charged a fee for business payments</strong>, even though these were free.</p>
       </div>
     </div>
   </div>
@@ -92,9 +95,9 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <h2>Two ways of paying, one misunderstanding</h2>
-        <p>Vipps allowed people to send money directly to each other and to pay businesses online. Both experiences used the same familiar service, but they followed different rules.</p>
-        <p>Research showed that users were carrying expectations from personal transfers into online shopping. They assumed fees could apply even when they did not.</p>
+        <p>The misunderstanding affected purchasing behaviour. Transaction data showed that customers rarely used Vipps for expensive purchases, preferring cards for larger amounts. There was also a more serious risk: people could be tricked into transferring money to a private individual while believing they were paying a company, losing their money without receiving the goods they expected.</p>
+        <h2>The problem was in plain sight</h2>
+        <p>The interface placed most of its visual emphasis on the amount being paid, while the recipient’s identity was secondary. In the existing checkout, a large purple card dominated the screen, with the merchant’s name and logo appearing much smaller above it.</p>
       </div>
     </div>
   </div>
@@ -110,18 +113,20 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <p>This changed our understanding of the problem. We were not dealing with a fee that needed a better explanation. We were dealing with people misunderstanding the type of payment they were making.</p>
-        <h2>Making the distinction clearer</h2>
-        <p>The research helped us redirect the design work towards making payment types easier to recognise.</p>
-        <p>We revisited the payment flow, information hierarchy and communication to help users understand whether they were sending money to another person or paying for a purchase.</p>
+        <p>The similarity between the two payment experiences made it difficult to recognise whether the recipient was a person or a business.</p>
+        <h2>Putting the merchant first</h2>
+        <p>I explored reversing that visual hierarchy. In an early experiment, the merchant’s logo became the primary element, supported by the company name and purchase information. The amount remained visible, but no longer dominated the experience.</p>
       </div>
     </div>
   </div>
 
   <div class="imodule reveal">
     <div class="igrid">
-      <figure class="media media--wide">
-        <img src="images/feature-sync.svg" alt="Before and after showing how payment context was made clearer earlier in the flow." width="1200" height="900" loading="lazy">
+      <figure class="media media--wide project-screens">
+        <picture>
+          <source media="(max-width: 700px)" srcset="images/vipps-01-mobile.png">
+          <img src="images/vipps-01-desktop.png" alt="Two Vipps payment screens side by side: today’s checkout, and an early experiment where the merchant’s logo and name become the main element." width="2400" height="1029" loading="lazy">
+        </picture>
       </figure>
     </div>
   </div>
@@ -129,10 +134,10 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <p>The important decision was to establish that distinction earlier, rather than rely on fee explanations to correct an existing misunderstanding.</p>
-        <h2>Testing what people understood</h2>
-        <p>We wanted to know whether the changes helped people understand their payments, not simply whether they could complete a transaction.</p>
-        <p>In subsequent testing, the proportion of participants who believed online Vipps payments involved a fee <strong>fell from approximately 80% to 17%.</strong></p>
+        <p>The intention was to make the recipient immediately recognisable and help customers understand which type of payment they were making.</p>
+        <p>This was one part of a wider effort. Other teams introduced clearer explanations within the payment journey, while marketing campaigns reinforced the distinction between personal transfers and business payments.</p>
+        <h2>Impact</h2>
+        <p>Over roughly two years, the proportion of users who believed business payments could involve a fee <strong>fell from approximately 80% to 17%</strong>. Shopping basket values also increased, addressing a commercial problem reflected in the earlier transaction data.</p>
       </div>
     </div>
   </div>
@@ -148,8 +153,8 @@
   <div class="imodule reveal">
     <div class="igrid">
       <div class="prose project-narrative">
-        <p>The result showed that the revised experience helped correct a specific misconception about how Vipps worked.</p>
-        <p>For me, the value of the research was that it changed what we designed. What initially appeared to be a problem about fees turned out to be a problem about distinguishing two familiar ways of paying.</p>
+        <p>These improvements resulted from a coordinated effort across Vipps, involving changes to the product and communication over time, rather than a single interface experiment.</p>
+        <p>My contribution began with identifying a misunderstanding that had gone largely unnoticed, despite its consequences for purchasing behaviour and customer trust. I then helped address it through design work that made the recipient’s identity more prominent.</p>
       </div>
     </div>
   </div>

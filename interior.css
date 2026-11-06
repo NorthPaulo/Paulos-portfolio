@@ -106,6 +106,15 @@
   }
 }
 
+/* Vipps: phone screen captures. The desktop image keeps the standard wide
+   frame. On phones the frame takes the mobile image's own 4:5 shape, so the
+   whole screen is shown instead of a cropped strip. */
+@media (max-width: 700px) {
+  .media.project-screens {
+    aspect-ratio: 4 / 5;
+  }
+}
+
 /* ---------- 3. Metadata row ---------- */
 
 .meta-row {
