@@ -1443,9 +1443,12 @@
   grid-column: 1 / span 2;
   display: block;
   width: 100%;
-  max-width: 72px;
+  max-width: 100px;
   height: auto;
   margin: 0;
+  /* Thin line drawn just inside the cover edge. */
+  outline: 1px solid var(--border);
+  outline-offset: -1px;
 }
 
 .entry-list.library-books .entry__main {
@@ -1492,19 +1495,28 @@
   max-width: 58ch;
 }
 
+/* Phones and landscape phones: cover on the left, title and author/year
+   aligned left beside it, the annotation running full width beneath both.
+   The cover floats left; the annotation clears it so it starts below. */
 @media (max-width: 700px) {
   .entry-list.library-books .entry {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    padding: clamp(1.25rem, 3.5vh, 1.75rem) 0;
+    display: block;
+    padding: clamp(1.75rem, 4.5vh, 2.25rem) 0;
   }
   .entry-list.library-books .entry__cover {
-    grid-column: 1;
-    max-width: 56px;
-    margin-bottom: 1rem;
+    float: left;
+    width: 3.85rem;
+    max-width: 3.85rem;
+    margin: 0 1.25rem 1.1rem 0;
   }
-  .entry-list.library-books .entry__main {
-    grid-column: 1;
+  .entry-list.library-books .entry__title {
+    margin: 0 0 0.35rem 0;
+  }
+  .entry-list.library-books .entry__aside {
+    margin: 0;
+  }
+  .entry-list.library-books .entry__note {
+    clear: left;
   }
   .entry-list.library-books .entry__title,
   .resume .entry__title {
