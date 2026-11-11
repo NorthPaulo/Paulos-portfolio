@@ -635,18 +635,25 @@ html.motion-ready .hero-content:not(.is-visible) .hero-support {
 
 .projects-eyebrow {
   margin: 0 0 0.6rem 0;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-secondary);
 }
 
+/* Phone: case and homepage eyebrows keep their phone size (12.8 px). */
+@media (max-width: 700px) {
+  .projects-eyebrow {
+    font-size: 0.8rem;
+  }
+}
+
 .projects-title {
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(2.25rem, 1.9rem + 1.2vw, 3rem);
+  font-size: var(--type-2);
   line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--text-primary);
@@ -753,7 +760,7 @@ html.motion-ready .hero-content:not(.is-visible) .hero-support {
   display: block;
   margin: 0;
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 500;
   /* Mobile 22-25px */
   font-size: clamp(1.375rem, 1.3rem + 0.4vw, 1.5625rem);
   line-height: 1.08;
@@ -861,12 +868,6 @@ html.motion-ready .hero-content:not(.is-visible) .hero-support {
     grid-template-columns: 1fr;
     row-gap: 68px;
   }
-  /* Phone index: its own typographic scale, not reduced desktop cards.
-     Stepped down about 7% so the section introduction sits clearly below
-     the hero proposition rather than answering it at the same volume. */
-  .projects-title {
-    font-size: clamp(2.3rem, 2.125rem + 1vw, 2.55rem);
-  }
   /* Eyebrow, heading and first card drawn a little closer together, so
      the introduction reads as one unit before the work begins.
      Scoped to .projects-head: the same eyebrow class is used by the
@@ -879,7 +880,6 @@ html.motion-ready .hero-content:not(.is-visible) .hero-support {
   }
   .project-card__title {
     font-size: clamp(1.625rem, 1.55rem + 0.4vw, 1.8125rem);
-    font-weight: 600;
     line-height: 1.08;
   }
   .project-card__meta {
@@ -1197,22 +1197,29 @@ html.menu-open .site-header {
 .menu-eyebrow {
   margin: 0 0 0.9rem 0;
   font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-secondary);
 }
 
+/* Phone: the Selected work label keeps its phone size (15 px). */
+@media (max-width: 700px) {
+  .menu-eyebrow {
+    font-size: 0.9375rem;
+  }
+}
+
 .menu-work li + li {
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
 }
 
 .menu-work a {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(1.625rem, 1.5rem + 0.5vw, 1.75rem);
-  line-height: 1.2;
+  font-size: clamp(1.375rem, 1.3rem + 0.3vw, 1.5rem);
+  line-height: 1.1;
   color: var(--text-primary);
   text-decoration: none;
 }
@@ -1267,8 +1274,8 @@ html.menu-open .site-header {
 
   .menu-primary {
     align-self: start;
-    justify-self: start;
-    text-align: left;
+    justify-self: end;
+    text-align: right;
   }
 
   .menu-primary a {

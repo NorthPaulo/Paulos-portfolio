@@ -68,6 +68,122 @@
   }
 }
 
+/* ---------- Customer journey map ----------
+   A typography-led service map. The labels are real HTML text, with no
+   drawn lines. Desktop: three stages in one row, with full titles and item
+   lists. Phones (700px and below): three narrow columns, short titles, no
+   item lists.
+   Colour: black titles, muted labels, burgundy eyebrows. */
+
+.journey-map {
+  grid-column: 1 / -1;
+  margin: 4rem 0 0;
+  padding: 0;
+}
+
+.journey-map__title {
+  margin: 0 0 clamp(2.5rem, 5vw, 3.75rem);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--type-2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.journey-map__stages {
+  --journey-gap: clamp(2rem, 4vw, 3.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--journey-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journey-map__stage {
+  padding-top: 1.5rem;
+}
+
+.journey-map__index {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.journey-map__stage-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.9rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+/* Short stage titles are shown on phones only (see the phone rules below). */
+.journey-map__stage-short {
+  display: none;
+}
+
+.journey-map__items {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journey-map__items li {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.journey-map__note {
+  max-width: 60ch;
+  margin: 2.5rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .journey-map {
+    margin-top: 2.5rem;
+  }
+  .journey-map__title {
+    margin-bottom: 2.25rem;
+  }
+  .journey-map__stages {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .journey-map__stage {
+    padding-top: 0;
+  }
+  /* Phone: short stage titles, and no item lists under the stages. */
+  .journey-map__stage-full {
+    display: none;
+  }
+  .journey-map__stage-short {
+    display: inline;
+  }
+  .journey-map__items {
+    display: none;
+  }
+  /* Phone: the journey numbers keep their phone size (15 px). */
+  .journey-map__index {
+    font-size: 0.9375rem;
+  }
+}
+
 /* ---------- 2. Deck / introductory text ---------- */
 
 .deck {
@@ -801,11 +917,18 @@
 
 .nextproj__label {
   margin: 0 0 0.8rem 0;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-secondary);
+}
+
+/* Phone: the Next project label keeps its phone size (12.8 px). */
+@media (max-width: 700px) {
+  .nextproj__label {
+    font-size: 0.8rem;
+  }
 }
 
 .nextproj__title {
@@ -850,15 +973,14 @@
   margin-bottom: 14px;
 }
 
-/* Statement: 34px on a phone rising to 49px on a desktop. Weight stays
-   at 400 at every size -- hierarchy comes from scale, not from weight. */
+/* Statement: the shared section-heading role (--type-2), regular weight. */
 .site-footer__cta {
   margin: 0;
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(2.125rem, 1.8rem + 1.42vw, 3.0625rem);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
+  font-size: var(--type-2);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   color: var(--text-primary);
   max-width: 700px;
 }

@@ -53,7 +53,7 @@
 <div class="menu-panel" id="site-menu" role="dialog" aria-modal="true" aria-label="Site menu" inert>
 <div class="menu-panel__inner">
 <nav class="menu-primary" aria-label="Main"><ul><li><a href="index.html#projects" aria-current="page">Work</a></li><li><a href="writing.html">Writing</a></li><li><a href="library.html">Library</a></li><li><a href="resume.html">Resume</a></li><li><a href="about.html">About</a></li></ul></nav>
-<section class="menu-work" aria-labelledby="menu-work-title"><h2 class="menu-eyebrow" id="menu-work-title">Selected work</h2><ul><li><a href="project-pass-id.html">Pass &amp; ID</a></li><li><a href="project-eiendomsmegler-1.html">EiendomsMegler 1</a></li><li><a href="project-vipps.html">Vipps Commerce Platform</a></li><li><a href="project-mattilsynet.html">Mattilsynet</a></li><li><a href="project-mercell.html">Mercell</a></li></ul></section>
+<section class="menu-work" aria-labelledby="menu-work-title"><h2 class="menu-eyebrow" id="menu-work-title">Selected work</h2><ul><li><a href="project-pass-id.html">Pass &amp; ID</a></li><li><a href="project-eiendomsmegler-1.html">EiendomsMegler 1</a></li><li><a href="project-vipps.html">Vipps Large Customers</a></li><li><a href="project-mattilsynet.html">Mattilsynet</a></li><li><a href="project-mercell.html">Mercell</a></li></ul></section>
 </div>
 </div>
 <main>
@@ -65,8 +65,38 @@
       <p class="projects-eyebrow project-masthead__eyebrow">SpareBank 1 &middot; Lead Designer</p>
       <h1 class="masthead__title masthead__title--editorial">Improving home loan conversion by removing unnecessary friction</h1>
       <p class="deck project-masthead__dek">Before bidding on a home, buyers often need a financing certificate from their bank.</p>
-      <figure class="media media--wide project-evidence">
-        <img src="images/project-fjordbank.svg" alt="Financing-certificate flow in the SpareBank 1 app." width="1200" height="900">
+      <figure class="journey-map" aria-labelledby="journey-map-title">
+        <h2 class="journey-map__title" id="journey-map-title">Mapping the customer journey</h2>
+        <ol class="journey-map__stages">
+          <li class="journey-map__stage">
+            <p class="journey-map__index">01</p>
+            <h3 class="journey-map__stage-title"><span class="journey-map__stage-full">User entry points</span><span class="journey-map__stage-short">Entry points</span></h3>
+            <ul class="journey-map__items">
+              <li>FINN</li>
+              <li>EiendomsMegler 1</li>
+              <li>SpareBank 1</li>
+              <li>Partner websites</li>
+            </ul>
+          </li>
+          <li class="journey-map__stage">
+            <p class="journey-map__index">02</p>
+            <h3 class="journey-map__stage-title"><span class="journey-map__stage-full">Customer needs</span><span class="journey-map__stage-short">Main needs</span></h3>
+            <ul class="journey-map__items">
+              <li>Sell a property</li>
+              <li>Request a property valuation</li>
+              <li>Obtain a house evaluation</li>
+            </ul>
+          </li>
+          <li class="journey-map__stage">
+            <p class="journey-map__index">03</p>
+            <h3 class="journey-map__stage-title"><span class="journey-map__stage-full">Request and contact</span><span class="journey-map__stage-short">Send request</span></h3>
+            <ul class="journey-map__items">
+              <li>Choose the relevant service</li>
+              <li>Provide their contact information</li>
+              <li>Submit a request to SpareBank 1</li>
+            </ul>
+          </li>
+        </ol>
       </figure>
     </div>
   </div>
@@ -84,8 +114,8 @@
 
   <div class="imodule reveal">
     <div class="igrid">
-      <figure class="media media--wide">
-        <img src="images/card-placeholder.svg" alt="" width="1200" height="800" loading="lazy">
+      <figure class="media media--wide media--natural">
+        <img src="images/SB1_A-B_01.webp" alt="Research board of sticky notes grouped under questions about customer expectations, needs and geography." width="2224" height="454" loading="lazy">
       </figure>
     </div>
   </div>
@@ -104,8 +134,8 @@
 
   <div class="imodule reveal">
     <div class="igrid">
-      <figure class="media media--wide">
-        <img src="images/card-placeholder.svg" alt="" width="1200" height="800" loading="lazy">
+      <figure class="media media--wide media--natural">
+        <img src="images/SB1_A-B_02.webp" alt="Flow diagram of the home sale journey, from the start button through valuation, settlement and receipt." width="2224" height="1071" loading="lazy">
       </figure>
     </div>
   </div>
@@ -115,17 +145,16 @@
       <div class="prose project-narrative">
         <p>Removing unnecessary requirements made the application shorter and easier to complete, without asking customers to do work that could be handled later.</p>
         <h2>Improving the mobile entry point</h2>
-        <p>We also redesigned how customers entered the financing certificate journey.</p>
-        <p>The existing component was poorly suited to the mobile banking experience. I worked on its content, visual hierarchy and interaction to make the purpose and next action clearer.</p>
-        <p>This was more than a visual update. The entry point was part of the conversion journey, and its design affected how customers began the process.</p>
+        <p>When I examined the analytics, I found that 93% of users were accessing the journey on mobile. Yet the entry points at both the bank and the real-estate broker were still designed primarily for desktop.</p>
+        <p>I shared the findings with the team, and they became the starting point for a more focused effort to improve mobile conversion. I redesigned the entry point’s content, visual hierarchy and interactions to make the purpose and next step clearer.</p>
       </div>
     </div>
   </div>
 
   <div class="imodule reveal">
     <div class="igrid">
-      <figure class="media media--wide">
-        <img src="images/card-placeholder.svg" alt="" width="1200" height="800" loading="lazy">
+      <figure class="media media--wide media--natural">
+        <img src="images/SB1_A-B_03.webp" alt="A test card beside two phone screens: the new valuation entry point and the original step 2." width="2224" height="998" loading="lazy">
       </figure>
     </div>
   </div>
@@ -134,10 +163,8 @@
     <div class="igrid">
       <div class="prose project-narrative">
         <h2>Testing what worked</h2>
-        <p>The changes were developed and refined through user testing and A/B testing.</p>
-        <p>We tested different approaches to the application flow, including its structure, content and interface elements.</p>
-        <p>Qualitative research helped us understand where customers hesitated and what made the application unnecessarily difficult. We used quantitative data from several rounds of A/B testing to evaluate changes and refine the experience. Each iteration informed further improvements, allowing us to optimise the journey over time.</p>
-        <p>The redesign evolved through several iterations rather than one large release.</p>
+        <p>We approached the redesign through a series of hypotheses rather than one big change. Working together, the team identified opportunities to improve the journey, tested targeted changes and analysed the results of successive A/B tests.</p>
+        <p>Each experiment helped us understand what worked and what needed further refinement. In a service like this, meaningful improvements often come from small, carefully measured changes.</p>
       </div>
     </div>
   </div>
@@ -146,8 +173,10 @@
     <div class="igrid">
       <div class="prose project-narrative">
         <h2>Measured impact</h2>
-        <p>The redesign was developed through several rounds of A/B testing and optimisation, rather than a single experiment.</p>
-        <p>In one documented A/B test involving 14,375 visitors, the redesigned experience achieved an 11.53% conversion rate, compared with 9.40% for the original. This represents an improvement of 2.13 percentage points, or 22.7% relative to the original conversion rate.</p>
+        <p>The results came from separate experiments, each with its own comparison.</p>
+        <p>In an earlier A/B test, variant A achieved an 11.07% conversion rate, compared with 9.72% for variant B — a 13.9% relative improvement in measured conversion rate.</p>
+        <p>In a later test involving 14,375 visitors, the redesigned experience achieved 11.53%, compared with 9.40% for the original — a 22.7% relative improvement in measured conversion rate.</p>
+        <p>Together, the tests illustrate how the team used evidence to guide successive improvements, rather than relying on a single redesign.</p>
       </div>
     </div>
   </div>
